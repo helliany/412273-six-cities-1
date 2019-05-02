@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Ольга Юрманова](https://up.htmlacademy.ru/react/1/user/412273).
-* Наставник: `Неизвестно`.
+* Наставник: [Дмитрий Марков](https://up.htmlacademy.ru/react/1/user/83550).
 
 ---
 
