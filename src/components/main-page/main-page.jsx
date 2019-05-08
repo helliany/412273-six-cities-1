@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
   places: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onClick: PropTypes.func,
 };
 
 const MainPage = (props) => {
-  const {places} = props;
+  const {places, onClick} = props;
 
   return <div>
     <div style={{display: `none`}}>
@@ -126,7 +127,7 @@ const MainPage = (props) => {
                       </div>
                     </div>
                     <h2 className="place-card__name">
-                      <a href="#">{place}</a>
+                      <a href="#" onClick={onClick}>{place}</a>
                     </h2>
                     <p className="place-card__type">Apartment</p>
                   </div>
