@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from 'react-test-renderer';
-import MainPage from "./main-page.jsx";
+import OfferCardList from "./offer-card-list.jsx";
 
 const mocks = [
   {
@@ -25,10 +25,10 @@ const mocks = [
   },
 ];
 
-it(`MainPage correctly renders`, () => {
+it(`OfferCardList  correctly renders`, () => {
   const offers = mocks;
   const tree = renderer
-    .create(<MainPage
+    .create(<OfferCardList
       offers={offers}
     />)
     .toJSON();
