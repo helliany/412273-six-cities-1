@@ -24,6 +24,11 @@ const defaultProps = {
 const OfferCard = (props) => {
   const {offer, onTitleClick, onImgClick} = props;
 
+  const _handleImgLink = (evt) => {
+    evt.preventDefault();
+    onImgClick(offer.id);
+  };
+
   return <article className="cities__place-card place-card" id={`${offer.id}`}>
 
     {offer.premium &&
@@ -32,10 +37,7 @@ const OfferCard = (props) => {
       </div>}
 
     <div className="cities__image-wrapper place-card__image-wrapper">
-      <a href="#" onClick={(evt) => {
-        evt.preventDefault();
-        onImgClick(offer.id);
-      }}>
+      <a href="#" onClick={_handleImgLink}>
         <img className="place-card__image" src={`img/${offer.img}`} width="260" height="200" alt="Place image" />
       </a>
     </div>
