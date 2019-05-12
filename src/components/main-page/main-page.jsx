@@ -17,6 +17,10 @@ const propTypes = {
   onClick: PropTypes.func,
 };
 
+const defaultProps = {
+  onClick: () => {},
+};
+
 const MainPage = (props) => {
   const {offers, onClick} = props;
 
@@ -123,5 +127,6 @@ const MainPage = (props) => {
 };
 
 MainPage.propTypes = propTypes;
+MainPage.defaultProps = defaultProps;
 
 export default MainPage;

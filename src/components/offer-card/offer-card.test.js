@@ -1,20 +1,11 @@
 import React from "react";
 import renderer from 'react-test-renderer';
-import OfferCard from "./offer-card.jsx";
 
-const mocks = {
-  name: `Beautiful location`,
-  type: `Apartment`,
-  premium: true,
-  price: 120,
-  favorite: false,
-  rating: 93,
-  img: `path`,
-  id: `offer-1`,
-};
+import OfferCard from "./offer-card.jsx";
+import testMocks from "../../mocks/test-mocks";
 
 it(`OfferCard correctly renders`, () => {
-  const offer = mocks;
+  const offer = testMocks[0];
   const tree = renderer
     .create(<OfferCard
       offer={offer}

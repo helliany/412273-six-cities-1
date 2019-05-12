@@ -1,23 +1,14 @@
 import React from 'react';
 import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+
 import OfferCard from "./offer-card.jsx";
+import testMocks from "../../mocks/test-mocks";
 
 Enzyme.configure({adapter: new Adapter()});
 
-const mocks = {
-  name: `Beautiful location`,
-  type: `Apartment`,
-  premium: true,
-  price: 120,
-  favorite: false,
-  rating: 93,
-  img: `path`,
-  id: `offer-1`,
-};
-
 it(`Click on card title link correctly works`, () => {
-  const offer = mocks;
+  const offer = testMocks[0];
   const clickHandler = jest.fn();
   const offerCard = shallow(<OfferCard
     offer={offer}
@@ -29,7 +20,7 @@ it(`Click on card title link correctly works`, () => {
 });
 
 it(`Click on card img link correctly works`, () => {
-  const offer = mocks;
+  const offer = testMocks[0];
   const clickHandler = jest.fn();
   const offerCard = shallow(<OfferCard
     offer={offer}

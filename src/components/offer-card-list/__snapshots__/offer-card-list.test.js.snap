@@ -98,6 +98,7 @@ exports[`OfferCardList  correctly renders 1`] = `
       >
         <a
           href="#"
+          onClick={[Function]}
         >
           Beautiful location
         </a>
@@ -113,7 +114,6 @@ exports[`OfferCardList  correctly renders 1`] = `
     className="cities__place-card place-card"
     id="offer-2"
   >
-    
     <div
       className="cities__image-wrapper place-card__image-wrapper"
     >
@@ -197,6 +197,7 @@ exports[`OfferCardList  correctly renders 1`] = `
       >
         <a
           href="#"
+          onClick={[Function]}
         >
           Wood and stone place
         </a>

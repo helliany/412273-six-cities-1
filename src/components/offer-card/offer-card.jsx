@@ -16,15 +16,20 @@ const propTypes = {
   onImgClick: PropTypes.func,
 };
 
+const defaultProps = {
+  onTitleClick: () => {},
+  onImgClick: () => {},
+};
+
 const OfferCard = (props) => {
   const {offer, onTitleClick, onImgClick} = props;
 
   return <article className="cities__place-card place-card" id={`${offer.id}`}>
 
-    {offer.premium ?
+    {offer.premium &&
       <div className="place-card__mark">
         <span>Premium</span>
-      </div> : ``}
+      </div>}
 
     <div className="cities__image-wrapper place-card__image-wrapper">
       <a href="#" onClick={(evt) => {
@@ -68,5 +73,6 @@ const OfferCard = (props) => {
 };
 
 OfferCard.propTypes = propTypes;
+OfferCard.defaultProps = defaultProps;
 
 export default OfferCard;

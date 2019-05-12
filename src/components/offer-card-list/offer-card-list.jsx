@@ -16,6 +16,10 @@ const propTypes = {
   onTitleClick: PropTypes.func,
 };
 
+const defaultProps = {
+  onTitleClick: () => {},
+};
+
 class OfferCardList extends PureComponent {
   constructor(props) {
     super(props);
@@ -24,25 +28,25 @@ class OfferCardList extends PureComponent {
       activeCard: null,
     };
 
-    this._onImgClick = this._onImgClick.bind(this);
+    this._handleImgClick = this._handleImgClick.bind(this);
   }
 
   render() {
     const {offers, onTitleClick} = this.props;
 
     return <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer, id) =>
+      {offers.map((offer) =>
         <OfferCard
           offer={offer}
-          key={id}
+          key={offer.id}
           onTitleClick={onTitleClick}
-          onImgClick={this._onImgClick}
+          onImgClick={this._handleImgClick}
         />
       )}
     </div>;
   }
 
-  _onImgClick(cardId) {
+  _handleImgClick(cardId) {
     this.setState({
       activeCard: cardId,
     });
@@ -50,5 +54,6 @@ class OfferCardList extends PureComponent {
 }
 
 OfferCardList.propTypes = propTypes;
+OfferCardList.defaultProps = defaultProps;
 
 export default OfferCardList;
