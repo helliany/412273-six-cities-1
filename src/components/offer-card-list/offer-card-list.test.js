@@ -1,13 +1,13 @@
 import React from "react";
 import renderer from 'react-test-renderer';
 
-import MainPage from "./main-page.jsx";
+import OfferCardList from "./offer-card-list.jsx";
 import testMocks from "../../mocks/test-mocks";
 
-it(`MainPage correctly renders`, () => {
+it(`OfferCardList  correctly renders`, () => {
   const offers = testMocks;
   const tree = renderer
-    .create(<MainPage
+    .create(<OfferCardList
       offers={offers}
     />)
     .toJSON();
