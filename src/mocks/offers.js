@@ -8,6 +8,7 @@ export default [
     rating: 93,
     img: `apartment-01.jpg`,
     id: `offer-1`,
+    coords: [52.3909553943508, 4.85309666406198],
   },
   {
     name: `Wood and stone place`,
@@ -18,6 +19,7 @@ export default [
     rating: 80,
     img: `room.jpg`,
     id: `offer-2`,
+    coords: [52.369553943508, 4.85309666406198],
   },
   {
     name: `Canal View Prinsengracht`,
@@ -28,6 +30,7 @@ export default [
     rating: 70,
     img: `apartment-02.jpg`,
     id: `offer-3`,
+    coords: [52.3909553943508, 4.929309666406198],
   },
   {
     name: `Nice, cozy, warm big bed apartment`,
@@ -38,5 +41,6 @@ export default [
     rating: 100,
     img: `apartment-03.jpg`,
     id: `offer-4`,
+    coords: [52.3809553943508, 4.939309666406198],
   },
 ];

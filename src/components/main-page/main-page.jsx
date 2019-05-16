@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 import OfferCardList from '../offer-card-list/offer-card-list.jsx';
+import Map from '../map/map.jsx';
 
 const propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
@@ -15,6 +16,7 @@ const propTypes = {
     id: PropTypes.string.isRequired,
   })).isRequired,
   onClick: PropTypes.func,
+  leaflet: PropTypes.object.isRequired,
 };
 
 const defaultProps = {
@@ -22,7 +24,7 @@ const defaultProps = {
 };
 
 const MainPage = (props) => {
-  const {offers, onClick} = props;
+  const {offers, onClick, leaflet} = props;
 
   return <>
     <div style={{display: `none`}}>
@@ -118,7 +120,10 @@ const MainPage = (props) => {
 
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <Map
+              offers={offers}
+              leaflet={leaflet}
+            />
           </div>
         </div>
       </div>
