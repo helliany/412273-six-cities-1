@@ -17,6 +17,7 @@ const propTypes = {
   })).isRequired,
   onClick: PropTypes.func,
   leaflet: PropTypes.object.isRequired,
+  mapSettings: PropTypes.object.isRequired,
 };
 
 const defaultProps = {
@@ -24,7 +25,7 @@ const defaultProps = {
 };
 
 const MainPage = (props) => {
-  const {offers, onClick, leaflet} = props;
+  const {offers, onClick, leaflet, mapSettings} = props;
 
   return <>
     <div style={{display: `none`}}>
@@ -120,10 +121,13 @@ const MainPage = (props) => {
 
           </section>
           <div className="cities__right-section">
-            <Map
-              offers={offers}
-              leaflet={leaflet}
-            />
+            <section className="cities__map map">
+              <Map
+                offers={offers}
+                leaflet={leaflet}
+                settings={mapSettings}
+              />
+            </section>
           </div>
         </div>
       </div>

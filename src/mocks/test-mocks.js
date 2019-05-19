@@ -44,4 +44,15 @@ const testLeaflet = {
   },
 };
 
-export {testOffers, testLeaflet};
+const mapSettings = {
+  center: [52, 4],
+  zoom: 12,
+  zoomControl: false,
+  marker: true,
+  icon: {
+    iconUrl: `img/map-pin.svg`,
+    iconSize: [30, 30]
+  },
+};
+
+export {testOffers, testLeaflet, mapSettings};

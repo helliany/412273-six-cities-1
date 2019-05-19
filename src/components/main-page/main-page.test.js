@@ -2,7 +2,7 @@ import React from "react";
 import renderer from 'react-test-renderer';
 
 import MainPage from "./main-page.jsx";
-import {testOffers, testLeaflet} from "../../mocks/test-mocks";
+import {testOffers, testLeaflet, mapSettings} from "../../mocks/test-mocks";
 
 it(`MainPage correctly renders`, () => {
   const offers = testOffers;
@@ -12,6 +12,7 @@ it(`MainPage correctly renders`, () => {
     .create(<MainPage
       offers={offers}
       leaflet={leaflet}
+      mapSettings={mapSettings}
     />)
     .toJSON();
 

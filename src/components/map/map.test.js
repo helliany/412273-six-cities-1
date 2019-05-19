@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 
 import Map from './map.jsx';
-import {testOffers, testLeaflet} from "../../mocks/test-mocks";
+import {testOffers, testLeaflet, mapSettings} from "../../mocks/test-mocks";
 
 it(`Map correctly renders`, () => {
   const offers = testOffers;
@@ -12,6 +12,7 @@ it(`Map correctly renders`, () => {
     .create(<Map
       offers={offers}
       leaflet={leaflet}
+      settings={mapSettings}
     />)
     .toJSON();
 

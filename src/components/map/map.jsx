@@ -13,6 +13,13 @@ const propTypes = {
     id: PropTypes.string.isRequired,
   })).isRequired,
   leaflet: PropTypes.object.isRequired,
+  settings: PropTypes.shape({
+    center: PropTypes.array.isRequired,
+    zoom: PropTypes.number.isRequired,
+    zoomControl: PropTypes.bool.isRequired,
+    marker: PropTypes.bool.isRequired,
+    icon: PropTypes.object.isRequired,
+  }).isRequired,
 };
 
 class Map extends PureComponent {
@@ -22,7 +29,7 @@ class Map extends PureComponent {
 
   render() {
     return (
-      <section className="cities__map map" id="map" />
+      <div id="map"></div>
     );
   }
 
@@ -31,22 +38,10 @@ class Map extends PureComponent {
   }
 
   _initMap() {
-    const {offers, leaflet} = this.props;
+    const {offers, leaflet, settings} = this.props;
 
-    const Settings = {
-      center: [52.38333, 4.9],
-      zoom: 12,
-      zoomControl: false,
-      marker: true,
-      icon: leaflet.icon({
-        iconUrl: `img/map-pin.svg`,
-        iconSize: [30, 30]
-      }),
-    };
-
-    const map = leaflet.map(`map`, Settings);
-
-    map.setView(Settings.center, Settings.zoom);
+    const map = leaflet.map(`map`, settings);
+    map.setView(settings.center, settings.zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -56,7 +51,7 @@ class Map extends PureComponent {
 
     offers.forEach((offer) => {
       leaflet
-        .marker(offer.coords, {icon: Settings.icon})
+        .marker(offer.coords, {icon: settings.icon})
         .addTo(map);
     });
   }
