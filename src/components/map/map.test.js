@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 import renderer from 'react-test-renderer';
 
-import MainPage from "./main-page.jsx";
+import Map from './map.jsx';
 import {testOffers, testLeaflet, mapSettings} from "../../mocks/test-mocks";
 
-it(`MainPage correctly renders`, () => {
+it(`Map correctly renders`, () => {
   const offers = testOffers;
   const leaflet = testLeaflet;
 
   const tree = renderer
-    .create(<MainPage
+    .create(<Map
       offers={offers}
       leaflet={leaflet}
-      mapSettings={mapSettings}
+      settings={mapSettings}
     />)
     .toJSON();
 

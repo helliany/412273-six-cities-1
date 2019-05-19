@@ -2,10 +2,10 @@ import React from "react";
 import renderer from 'react-test-renderer';
 
 import OfferCardList from "./offer-card-list.jsx";
-import testMocks from "../../mocks/test-mocks";
+import {testOffers} from "../../mocks/test-mocks";
 
 it(`OfferCardList  correctly renders`, () => {
-  const offers = testMocks;
+  const offers = testOffers;
   const tree = renderer
     .create(<OfferCardList
       offers={offers}
