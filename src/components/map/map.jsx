@@ -2,16 +2,7 @@ import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 
 const propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    favorite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    img: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-  })).isRequired,
+  coords: PropTypes.array.isRequired,
   leaflet: PropTypes.object.isRequired,
   settings: PropTypes.shape({
     center: PropTypes.array.isRequired,
@@ -23,10 +14,6 @@ const propTypes = {
 };
 
 class Map extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div id="map"></div>
@@ -37,11 +24,17 @@ class Map extends PureComponent {
     this._initMap();
   }
 
+  componentDidUpdate() {
+    this.layerGroup.clearLayers();
+    this._addMarkers(this.layerGroup);
+  }
+
   _initMap() {
-    const {offers, leaflet, settings} = this.props;
+    const {leaflet, settings} = this.props;
 
     const map = leaflet.map(`map`, settings);
     map.setView(settings.center, settings.zoom);
+    this.layerGroup = leaflet.layerGroup().addTo(map);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -49,10 +42,16 @@ class Map extends PureComponent {
       })
       .addTo(map);
 
-    offers.forEach((offer) => {
+    this._addMarkers(this.layerGroup);
+  }
+
+  _addMarkers(layer) {
+    const {coords, leaflet, settings} = this.props;
+
+    coords.forEach((coord) => {
       leaflet
-        .marker(offer.coords, {icon: settings.icon})
-        .addTo(map);
+        .marker(coord, {icon: settings.icon})
+        .addTo(layer);
     });
   }
 }

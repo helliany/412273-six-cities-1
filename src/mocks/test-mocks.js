@@ -1,5 +1,6 @@
-const testOffers = [
+const offers = [
   {
+    city: `Amsterdam`,
     name: `Beautiful location`,
     type: `Apartment`,
     premium: true,
@@ -11,6 +12,7 @@ const testOffers = [
     coords: [52.3909553943508, 4.85309666406198],
   },
   {
+    city: `Paris`,
     name: `Wood and stone place`,
     type: `Private room`,
     premium: false,
@@ -23,7 +25,7 @@ const testOffers = [
   },
 ];
 
-const testLeaflet = {
+const leaflet = {
   map() {
     return {
       setView: jest.fn(),
@@ -42,6 +44,12 @@ const testLeaflet = {
       addTo: jest.fn(),
     };
   },
+  layerGroup() {
+    return {
+      addTo: jest.fn(),
+      clearLayers: jest.fn(),
+    };
+  }
 };
 
 const mapSettings = {
@@ -55,4 +63,4 @@ const mapSettings = {
   },
 };
 
-export {testOffers, testLeaflet, mapSettings};
+export {offers, leaflet, mapSettings};

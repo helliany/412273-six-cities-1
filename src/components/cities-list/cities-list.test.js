@@ -1,19 +1,17 @@
 import React from "react";
 import renderer from 'react-test-renderer';
 
-import MainPage from "./main-page.jsx";
-import {offers, leaflet, mapSettings} from "../../mocks/test-mocks";
+import CitiesList from "./cities-list.jsx";
+import {offers} from "../../mocks/test-mocks";
 
-it(`MainPage correctly renders`, () => {
+it(`CitiesList correctly renders`, () => {
   const cities = Array.from(offers.map((offer) => offer.city));
   const activeCity = cities[0];
   const tree = renderer
-    .create(<MainPage
-      offers={offers}
-      leaflet={leaflet}
-      mapSettings={mapSettings}
+    .create(<CitiesList
       cities={cities}
       activeCity={activeCity}
+      onCityChange={jest.fn()}
     />)
     .toJSON();
 
