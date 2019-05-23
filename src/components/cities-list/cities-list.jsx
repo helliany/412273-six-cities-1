@@ -20,8 +20,8 @@ const CitiesList = (props) => {
   };
 
   return <ul className="locations__list tabs__list">
-    {cities.map((city, id) =>
-      <li className="locations__item" key={id}>
+    {cities.map((city) =>
+      <li className="locations__item" key={city}>
         <a className={`locations__item-link tabs__item
         ${city === activeCity ? `tabs__item--active` : ``}`}
         href="#"
