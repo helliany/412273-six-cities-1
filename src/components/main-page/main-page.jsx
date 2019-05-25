@@ -16,7 +16,16 @@ const propTypes = {
     img: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
   })).isRequired,
-  cities: PropTypes.array.isRequired,
+  selectedOffers: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    premium: PropTypes.bool.isRequired,
+    price: PropTypes.number.isRequired,
+    favorite: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    img: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+  })).isRequired,
   activeCity: PropTypes.string.isRequired,
   onClick: PropTypes.func,
   leaflet: PropTypes.object.isRequired,
@@ -29,10 +38,16 @@ const defaultProps = {
   onCityChange: () => {},
 };
 
+const CitiesNumber = {
+  MIN: 0,
+  MAX: 6,
+};
+
 const MainPage = (props) => {
-  const {offers, cities, activeCity, onClick, leaflet, mapSettings, onCityChange} = props;
-  const placesFound = `${offers.length} ${offers.length > 1 ? `places` : `place`} to stay in ${activeCity}`;
-  const coords = offers.map((offer) => offer.coords);
+  const {offers, selectedOffers, activeCity, onClick, leaflet, mapSettings, onCityChange} = props;
+  const placesFound = `${selectedOffers.length} ${selectedOffers.length > 1 ? `places` : `place`} to stay in ${activeCity}`;
+  const cities = Array.from(new Set(offers.map((offer) => offer.city))).slice(CitiesNumber.MIN, CitiesNumber.MAX);
+  const coords = selectedOffers.map((offer) => offer.coords);
 
   return <>
     <div style={{display: `none`}}>
@@ -95,7 +110,7 @@ const MainPage = (props) => {
             </form>
 
             <OfferCardList
-              offers={offers}
+              offers={selectedOffers}
               onTitleClick={onClick}
             />
 

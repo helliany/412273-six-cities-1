@@ -16,7 +16,16 @@ const propTypes = {
     img: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
   })).isRequired,
-  cities: PropTypes.array.isRequired,
+  selectedOffers: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    premium: PropTypes.bool.isRequired,
+    price: PropTypes.number.isRequired,
+    favorite: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    img: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+  })).isRequired,
   leaflet: PropTypes.object.isRequired,
   mapSettings: PropTypes.object.isRequired,
   onCityChange: PropTypes.func,
@@ -28,12 +37,12 @@ const defaultProps = {
 };
 
 const App = (props) => {
-  const {offers, cities, activeCity, leaflet, mapSettings, onCityChange} = props;
+  const {offers, selectedOffers, activeCity, leaflet, mapSettings, onCityChange} = props;
 
   return <>
     <MainPage
       offers = {offers}
-      cities = {cities}
+      selectedOffers = {selectedOffers}
       activeCity = {activeCity}
       leaflet = {leaflet}
       mapSettings = {mapSettings}
@@ -44,12 +53,15 @@ const App = (props) => {
 
 const mapStateToProps = (state, ownProps) => ({...ownProps,
   activeCity: state.city,
-  cities: Array.from(new Set(state.offers.map((offer) => offer.city))).slice(0, 6),
-  offers: state.offers.filter((offer) => offer.city === state.city),
+  offers: state.offers,
+  selectedOffers: state.selectedOffers,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onCityChange: (city) => dispatch(actionCreator.changeCity(city)),
+  onCityChange: (city) => {
+    dispatch(actionCreator.changeCity(city));
+    dispatch(actionCreator.getOffers());
+  },
 });
 
 App.propTypes = propTypes;
