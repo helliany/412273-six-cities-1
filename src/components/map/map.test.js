@@ -2,15 +2,13 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 
 import Map from './map.jsx';
-import {testOffers, testLeaflet, mapSettings} from "../../mocks/test-mocks";
+import {offers, leaflet, mapSettings} from "../../mocks/test-mocks";
 
 it(`Map correctly renders`, () => {
-  const offers = testOffers;
-  const leaflet = testLeaflet;
-
+  const coords = offers.map((offer) => offer.coords);
   const tree = renderer
     .create(<Map
-      offers={offers}
+      coords={coords}
       leaflet={leaflet}
       settings={mapSettings}
     />)

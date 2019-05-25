@@ -1,16 +1,16 @@
 import React from "react";
 import renderer from 'react-test-renderer';
 
-import MainPage from "./main-page.jsx";
+import {App} from "./app.jsx";
 import {offers, leaflet, mapSettings} from "../../mocks/test-mocks";
 
-it(`MainPage correctly renders`, () => {
+it(`App correctly renders`, () => {
   const cities = Array.from(offers.map((offer) => offer.city));
   const activeCity = cities[0];
   const selectedOffers = offers.filter((offer) => offer.city === activeCity);
 
   const tree = renderer
-    .create(<MainPage
+    .create(<App
       offers={offers}
       selectedOffers={selectedOffers}
       leaflet={leaflet}
