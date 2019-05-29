@@ -5,7 +5,7 @@ exports[`OfferCardList  correctly renders 1`] = `
   className="cities__places-list places__list tabs__content"
 >
   <article
-    className="cities__place-card place-card"
+    className="cities__place-card place-card "
     id="offer-1"
   >
     <div
@@ -111,7 +111,7 @@ exports[`OfferCardList  correctly renders 1`] = `
     </div>
   </article>
   <article
-    className="cities__place-card place-card"
+    className="cities__place-card place-card "
     id="offer-2"
   >
     <div
