@@ -12,24 +12,28 @@ const propTypes = {
     img: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
   }).isRequired,
+  active: PropTypes.string,
   onTitleClick: PropTypes.func,
   onImgClick: PropTypes.func,
 };
 
 const defaultProps = {
+  active: ``,
   onTitleClick: () => {},
   onImgClick: () => {},
 };
 
 const OfferCard = (props) => {
-  const {offer, onTitleClick, onImgClick} = props;
+  const {offer, active, onTitleClick, onImgClick} = props;
+
+  const activeCard = active ? `cities__place-card--active` : ``;
 
   const _handleImgLink = (evt) => {
     evt.preventDefault();
     onImgClick(offer.id);
   };
 
-  return <article className="cities__place-card place-card" id={`${offer.id}`}>
+  return <article className={`cities__place-card place-card ${activeCard}`} id={`${offer.id}`}>
 
     {offer.premium &&
       <div className="place-card__mark">

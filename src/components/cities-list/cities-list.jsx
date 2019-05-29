@@ -5,17 +5,20 @@ const propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   activeCity: PropTypes.string.isRequired,
   onCityChange: PropTypes.func,
+  onActiveItemChange: PropTypes.func,
 };
 
 const defaultProps = {
   onCityChange: () => {},
+  onActiveItemChange: () => {},
 };
 
 const CitiesList = (props) => {
-  const {cities, activeCity, onCityChange} = props;
+  const {cities, activeCity, onCityChange, onActiveItemChange} = props;
 
   const _handleClick = (evt, city) => {
     evt.preventDefault();
+    onActiveItemChange(city);
     onCityChange(city);
   };
 

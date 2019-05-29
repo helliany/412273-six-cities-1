@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 import OfferCard from "../offer-card/offer-card.jsx";
 
@@ -13,45 +13,36 @@ const propTypes = {
     img: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
   })).isRequired,
+  activeItem: PropTypes.string,
   onTitleClick: PropTypes.func,
+  onActiveItemChange: PropTypes.func,
 };
 
 const defaultProps = {
+  activeItem: ``,
   onTitleClick: () => {},
+  onActiveItemChange: () => {},
 };
 
-class OfferCardList extends PureComponent {
-  constructor(props) {
-    super(props);
+const OfferCardList = (props) => {
+  const {offers, activeItem, onTitleClick, onActiveItemChange} = props;
 
-    this.state = {
-      activeCard: null,
-    };
+  const _handleImgClick = (i) => {
+    onActiveItemChange(i);
+  };
 
-    this._handleImgClick = this._handleImgClick.bind(this);
-  }
-
-  render() {
-    const {offers, onTitleClick} = this.props;
-
-    return <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer) =>
-        <OfferCard
-          offer={offer}
-          key={offer.id}
-          onTitleClick={onTitleClick}
-          onImgClick={this._handleImgClick}
-        />
-      )}
-    </div>;
-  }
-
-  _handleImgClick(cardId) {
-    this.setState({
-      activeCard: cardId,
-    });
-  }
-}
+  return <div className="cities__places-list places__list tabs__content">
+    {offers.map((offer) =>
+      <OfferCard
+        offer={offer}
+        key={offer.id}
+        active={activeItem === offer.id ? activeItem : ``}
+        onTitleClick={onTitleClick}
+        onImgClick={_handleImgClick}
+      />
+    )}
+  </div>;
+};
 
 OfferCardList.propTypes = propTypes;
 OfferCardList.defaultProps = defaultProps;
