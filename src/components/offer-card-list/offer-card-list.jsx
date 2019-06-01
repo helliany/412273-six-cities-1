@@ -1,34 +1,34 @@
 import React from "react";
 import PropTypes from 'prop-types';
+
 import OfferCard from "../offer-card/offer-card.jsx";
+import withActiveItem from '../../hocs/with-active-item';
 
 const propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
-    favorite: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
-    img: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
   })).isRequired,
-  activeItem: PropTypes.string,
+  activeItem: PropTypes.number,
   onTitleClick: PropTypes.func,
   onActiveItemChange: PropTypes.func,
 };
 
 const defaultProps = {
-  activeItem: ``,
+  activeItem: 0,
   onTitleClick: () => {},
   onActiveItemChange: () => {},
 };
 
-const OfferCardList = (props) => {
-  const {offers, activeItem, onTitleClick, onActiveItemChange} = props;
-
-  const _handleImgClick = (i) => {
-    onActiveItemChange(i);
+const OfferCardList = ({offers, activeItem, onTitleClick, onActiveItemChange}) => {
+  const _handleImgClick = (item) => {
+    onActiveItemChange(item);
   };
 
   return <div className="cities__places-list places__list tabs__content">
@@ -36,7 +36,7 @@ const OfferCardList = (props) => {
       <OfferCard
         offer={offer}
         key={offer.id}
-        active={activeItem === offer.id ? activeItem : ``}
+        active={activeItem === offer.id ? activeItem : undefined}
         onTitleClick={onTitleClick}
         onImgClick={_handleImgClick}
       />
@@ -44,7 +44,9 @@ const OfferCardList = (props) => {
   </div>;
 };
 
+const WrappedOfferCardList = withActiveItem(OfferCardList);
+
 OfferCardList.propTypes = propTypes;
 OfferCardList.defaultProps = defaultProps;
 
-export default OfferCardList;
+export default WrappedOfferCardList;

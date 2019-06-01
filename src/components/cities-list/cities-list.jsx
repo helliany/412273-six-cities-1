@@ -1,14 +1,17 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
+import withActiveItem from '../../hocs/with-active-item';
+
 const propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  activeCity: PropTypes.string.isRequired,
+  activeCity: PropTypes.string,
   onCityChange: PropTypes.func,
   onActiveItemChange: PropTypes.func,
 };
 
 const defaultProps = {
+  activeCity: ``,
   onCityChange: () => {},
   onActiveItemChange: () => {},
 };
@@ -37,7 +40,9 @@ const CitiesList = (props) => {
   </ul>;
 };
 
+const WrappedCitiesList = withActiveItem(CitiesList);
+
 CitiesList.propTypes = propTypes;
 CitiesList.defaultProps = defaultProps;
 
-export default CitiesList;
+export default WrappedCitiesList;

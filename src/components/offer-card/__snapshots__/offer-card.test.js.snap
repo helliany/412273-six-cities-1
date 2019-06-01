@@ -3,7 +3,7 @@
 exports[`OfferCard correctly renders 1`] = `
 <article
   className="cities__place-card place-card "
-  id="offer-1"
+  id="1"
 >
   <div
     className="place-card__mark"
@@ -23,7 +23,7 @@ exports[`OfferCard correctly renders 1`] = `
         alt="Place image"
         className="place-card__image"
         height="200"
-        src="img/path"
+        src="path"
         width="260"
       />
     </a>
@@ -79,7 +79,7 @@ exports[`OfferCard correctly renders 1`] = `
         <span
           style={
             Object {
-              "width": "93%",
+              "width": "80%",
             }
           }
         />

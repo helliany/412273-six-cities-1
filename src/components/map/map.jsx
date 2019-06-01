@@ -2,10 +2,10 @@ import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 
 const propTypes = {
-  coords: PropTypes.array.isRequired,
+  coords: PropTypes.arrayOf(PropTypes.object),
+  location: PropTypes.object,
   leaflet: PropTypes.object.isRequired,
   settings: PropTypes.shape({
-    center: PropTypes.array.isRequired,
     zoom: PropTypes.number.isRequired,
     zoomControl: PropTypes.bool.isRequired,
     marker: PropTypes.bool.isRequired,
@@ -21,28 +21,41 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    this._initMap();
+    try {
+      this._initMap();
+    } catch (e) {
+      // data isn't loaded
+    }
   }
 
   componentDidUpdate() {
-    this.layerGroup.clearLayers();
-    this._addMarkers(this.layerGroup);
+    if (this.map) {
+      this.map.remove();
+      this._initMap();
+
+    } else {
+      this._initMap();
+    }
   }
 
   _initMap() {
-    const {leaflet, settings} = this.props;
+    const {
+      leaflet,
+      settings,
+      location: {latitude, longitude, zoom},
+    } = this.props;
 
-    const map = leaflet.map(`map`, settings);
-    map.setView(settings.center, settings.zoom);
-    this.layerGroup = leaflet.layerGroup().addTo(map);
+    this.map = leaflet.map(`map`, settings);
+    this.map.setView([latitude, longitude], zoom);
+    const layerGroup = leaflet.layerGroup().addTo(this.map);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
-      .addTo(map);
+      .addTo(this.map);
 
-    this._addMarkers(this.layerGroup);
+    this._addMarkers(layerGroup);
   }
 
   _addMarkers(layer) {
@@ -50,7 +63,7 @@ class Map extends PureComponent {
 
     coords.forEach((coord) => {
       leaflet
-        .marker(coord, {icon: settings.icon})
+        .marker([coord.latitude, coord.longitude], {icon: settings.icon})
         .addTo(layer);
     });
   }
