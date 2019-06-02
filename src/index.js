@@ -1,28 +1,33 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {createStore} from "redux";
+import {createStore, compose, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
-import {reducer} from "./reducer";
+import thunk from "redux-thunk";
 import leaflet from 'leaflet';
 
+import {Operation} from "./reducer/data/data";
+import reducer from "./reducer/index";
+import createAPI from './api';
 import App from "./components/app/app.jsx";
+import {mapSettings} from './constants';
 
-const mapSettings = {
-  center: [52.38333, 4.9],
-  zoom: 12,
-  zoomControl: false,
-  marker: true,
-  icon: leaflet.icon({
-    iconUrl: `img/map-pin.svg`,
-    iconSize: [30, 30]
-  }),
-};
+mapSettings.icon = leaflet.icon({
+  iconUrl: `img/map-pin.svg`,
+  iconSize: [30, 30]
+});
 
 const init = () => {
+  const api = createAPI((...args) => store.dispatch(...args));
+
   const store = createStore(
       reducer,
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+      compose(
+          applyMiddleware(thunk.withExtraArgument(api)),
+          window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+      )
   );
+
+  store.dispatch(Operation.loadData());
 
   ReactDOM.render(<Provider store={store}>
     <App

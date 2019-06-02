@@ -5,12 +5,13 @@ import CitiesList from "./cities-list.jsx";
 import {offers} from "../../mocks/test-mocks";
 
 it(`CitiesList correctly renders`, () => {
-  const cities = Array.from(offers.map((offer) => offer.city));
-  const activeCity = cities[0];
+  const cities = offers.map((offer) => offer.city.name);
+  const activeCity = offers[0].city.name;
+
   const tree = renderer
     .create(<CitiesList
       cities={cities}
-      activeCity={activeCity}
+      activeCityName={activeCity}
       onCityChange={jest.fn()}
     />)
     .toJSON();

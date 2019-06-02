@@ -4,33 +4,23 @@ import PropTypes from 'prop-types';
 import OfferCardList from '../offer-card-list/offer-card-list.jsx';
 import CitiesList from '../cities-list/cities-list.jsx';
 import Map from '../map/map.jsx';
-import withActiveItem from '../../hocs/with-active-item';
 
 const propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
     price: PropTypes.number.isRequired,
-    favorite: PropTypes.bool.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
     rating: PropTypes.number.isRequired,
-    img: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
+    previewImage: PropTypes.string.isRequired,
   })).isRequired,
-  selectedOffers: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    premium: PropTypes.bool.isRequired,
-    price: PropTypes.number.isRequired,
-    favorite: PropTypes.bool.isRequired,
-    rating: PropTypes.number.isRequired,
-    img: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-  })).isRequired,
-  activeCity: PropTypes.string.isRequired,
-  onClick: PropTypes.func,
+  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  activeCity: PropTypes.object.isRequired,
   leaflet: PropTypes.object.isRequired,
   mapSettings: PropTypes.object.isRequired,
+  onClick: PropTypes.func,
   onCityChange: PropTypes.func,
 };
 
@@ -39,19 +29,10 @@ const defaultProps = {
   onCityChange: () => {},
 };
 
-const CitiesNumber = {
-  MIN: 0,
-  MAX: 6,
-};
-
 const MainPage = (props) => {
-  const {offers, selectedOffers, activeCity, onClick, leaflet, mapSettings, onCityChange} = props;
-  const placesFound = `${selectedOffers.length} ${selectedOffers.length > 1 ? `places` : `place`} to stay in ${activeCity}`;
-  const cities = Array.from(new Set(offers.map((offer) => offer.city))).slice(CitiesNumber.MIN, CitiesNumber.MAX);
-  const coords = selectedOffers.map((offer) => offer.coords);
-
-  const WrappedCitiesList = withActiveItem(CitiesList);
-  const WrappedOfferCardList = withActiveItem(OfferCardList);
+  const {offers, cities, activeCity, onClick, leaflet, mapSettings, onCityChange} = props;
+  const placesFound = `${offers.length} ${offers.length > 1 ? `places` : `place`} to stay in ${activeCity.name}`;
+  const coords = offers.map((offer) => offer.location);
 
   return <>
     <div style={{display: `none`}}>
@@ -85,9 +66,9 @@ const MainPage = (props) => {
       <h1 className="visually-hidden">Cities</h1>
       <div className="cities tabs">
         <section className="locations container">
-          <WrappedCitiesList
+          <CitiesList
             cities = {cities}
-            activeCity = {activeCity}
+            activeCityName = {activeCity.name}
             onCityChange = {onCityChange}
           />
         </section>
@@ -113,8 +94,8 @@ const MainPage = (props) => {
               </ul>
             </form>
 
-            <WrappedOfferCardList
-              offers={selectedOffers}
+            <OfferCardList
+              offers={offers}
               onTitleClick={onClick}
             />
 
@@ -123,6 +104,7 @@ const MainPage = (props) => {
             <section className="cities__map map">
               <Map
                 coords={coords}
+                location={activeCity.location}
                 leaflet={leaflet}
                 settings={mapSettings}
               />

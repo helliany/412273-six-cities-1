@@ -1,27 +1,49 @@
 const offers = [
   {
-    city: `Amsterdam`,
-    name: `Beautiful location`,
+    city: {
+      name: `Amsterdam`,
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      }
+    },
+    title: `Beautiful location`,
     type: `Apartment`,
-    premium: true,
+    isPremium: true,
     price: 120,
-    favorite: false,
-    rating: 93,
-    img: `path`,
-    id: `offer-1`,
-    coords: [52.3909553943508, 4.85309666406198],
+    isFavorite: false,
+    rating: 4,
+    previewImage: `path`,
+    id: 1,
+    location: {
+      latitude: 52.35514938496378,
+      longitude: 4.673877537499948,
+      zoom: 8
+    },
   },
   {
-    city: `Paris`,
-    name: `Wood and stone place`,
+    city: {
+      name: `Paris`,
+      location: {
+        latitude: 52.370216,
+        longitude: 4.895168,
+        zoom: 10
+      }
+    },
+    title: `Wood and stone place`,
     type: `Private room`,
-    premium: false,
+    isPremium: false,
     price: 80,
-    favorite: true,
-    rating: 80,
-    img: `path`,
-    id: `offer-2`,
-    coords: [52.369553943508, 4.85309666406198],
+    isFavorite: true,
+    rating: 4.5,
+    previewImage: `path`,
+    id: 2,
+    location: {
+      latitude: 52.35514938496378,
+      longitude: 4.673877537499948,
+      zoom: 8
+    },
   },
 ];
 
