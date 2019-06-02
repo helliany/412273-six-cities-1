@@ -40,7 +40,6 @@ class Map extends PureComponent {
     if (this.map) {
       this.map.remove();
     }
-
     this._initMap();
   }
 

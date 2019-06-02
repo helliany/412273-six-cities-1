@@ -15,6 +15,8 @@ it(`App correctly renders`, () => {
       mapSettings={mapSettings}
       cities={cities}
       activeCity={activeCity}
+      isAuthorizationRequired={false}
+      user={{}}
     />)
     .toJSON();
 
