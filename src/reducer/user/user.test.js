@@ -6,3 +6,10 @@ it(`Action creator for check authorization correctly works`, () => {
     payload: true,
   });
 });
+
+it(`Action creator for sign in correctly works`, () => {
+  expect(actionCreator.signIn({email: `Oliver.conner@gmail.com`})).toEqual({
+    type: `SIGN_IN`,
+    payload: {email: `Oliver.conner@gmail.com`}
+  });
+});

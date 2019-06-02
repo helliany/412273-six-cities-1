@@ -1,3 +1,5 @@
+const BASE_URL = `https://es31-server.appspot.com/six-cities`;
+
 const mapSettings = {
   zoom: 12,
   zoomControl: false,
@@ -11,4 +13,4 @@ const CitiesNumber = {
 
 const RATING_PERCENT = 20;
 
-export {mapSettings, CitiesNumber, RATING_PERCENT};
+export {BASE_URL, mapSettings, CitiesNumber, RATING_PERCENT};
