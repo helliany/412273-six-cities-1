@@ -5,7 +5,7 @@ import MainPage from "./main-page.jsx";
 import {offers, leaflet, mapSettings} from "../../mocks/test-mocks";
 
 it(`MainPage correctly renders`, () => {
-  const cities = Array.from(offers.map((offer) => offer.city.name));
+  const cities = offers.map((offer) => offer.city.name);
   const activeCity = offers[0].city;
 
   const tree = renderer

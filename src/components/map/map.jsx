@@ -2,8 +2,16 @@ import React, {PureComponent} from "react";
 import PropTypes from 'prop-types';
 
 const propTypes = {
-  coords: PropTypes.arrayOf(PropTypes.object),
-  location: PropTypes.object,
+  coords: PropTypes.arrayOf(PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+  })).isRequired,
+  location: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+  }).isRequired,
   leaflet: PropTypes.object.isRequired,
   settings: PropTypes.shape({
     zoom: PropTypes.number.isRequired,
@@ -31,11 +39,9 @@ class Map extends PureComponent {
   componentDidUpdate() {
     if (this.map) {
       this.map.remove();
-      this._initMap();
-
-    } else {
-      this._initMap();
     }
+
+    this._initMap();
   }
 
   _initMap() {

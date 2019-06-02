@@ -9,4 +9,6 @@ const CitiesNumber = {
   MAX: 6,
 };
 
-export {mapSettings, CitiesNumber};
+const RATING_PERCENT = 20;
+
+export {mapSettings, CitiesNumber, RATING_PERCENT};

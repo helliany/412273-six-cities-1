@@ -18,9 +18,9 @@ const propTypes = {
   })).isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   activeCity: PropTypes.object.isRequired,
-  onClick: PropTypes.func,
   leaflet: PropTypes.object.isRequired,
   mapSettings: PropTypes.object.isRequired,
+  onClick: PropTypes.func,
   onCityChange: PropTypes.func,
 };
 
@@ -68,7 +68,7 @@ const MainPage = (props) => {
         <section className="locations container">
           <CitiesList
             cities = {cities}
-            activeCity = {activeCity.name}
+            activeCityName = {activeCity.name}
             onCityChange = {onCityChange}
           />
         </section>

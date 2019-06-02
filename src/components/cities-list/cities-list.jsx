@@ -5,7 +5,7 @@ import withActiveItem from '../../hocs/with-active-item';
 
 const propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
-  activeCity: PropTypes.string,
+  activeCityName: PropTypes.string,
   onCityChange: PropTypes.func,
   onActiveItemChange: PropTypes.func,
 };
@@ -17,7 +17,7 @@ const defaultProps = {
 };
 
 const CitiesList = (props) => {
-  const {cities, activeCity, onCityChange, onActiveItemChange} = props;
+  const {cities, activeCityName, onCityChange, onActiveItemChange} = props;
 
   const _handleClick = (evt, city) => {
     evt.preventDefault();
@@ -29,7 +29,7 @@ const CitiesList = (props) => {
     {cities.map((city) =>
       <li className="locations__item" key={city}>
         <a className={`locations__item-link tabs__item
-        ${city === activeCity ? `tabs__item--active` : ``}`}
+        ${city === activeCityName ? `tabs__item--active` : ``}`}
         href="#"
         onClick={(evt) => _handleClick(evt, city)}
         >

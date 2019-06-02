@@ -1,8 +1,47 @@
 import camelCase from 'camelcase-keys';
 
 const initialState = {
-  city: {},
-  offers: [],
+  city: {
+    name: ``,
+    location: {
+      latitude: 0,
+      longitude: 0,
+      zoom: 0,
+    }
+  },
+  offers: [
+    {
+      id: 1,
+      city: {
+        name: ``,
+        location: {
+          latitude: 0,
+          longitude: 0,
+          zoom: 0,
+        }
+      },
+      previewImage: ``,
+      images: [],
+      title: ``,
+      isFavorite: false,
+      isPremium: false,
+      rating: 1,
+      type: ``,
+      price: 100,
+      goods: [],
+      host: {
+        id: 1,
+        isPro: true,
+        name: ``,
+        avatarUrl: ``
+      },
+      location: {
+        latitude: 0,
+        longitude: 0,
+        zoom: 0,
+      }
+    }
+  ],
 };
 
 const getActiveCity = (offers, city) =>

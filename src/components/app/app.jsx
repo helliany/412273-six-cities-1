@@ -7,12 +7,21 @@ import {actionCreator} from '../../reducer/data/data';
 import {getCities, getActiveCity, getSelectedOffers} from '../../reducer/data/selectors';
 
 const propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  offers: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    price: PropTypes.number.isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    rating: PropTypes.number.isRequired,
+    previewImage: PropTypes.string.isRequired,
+  })).isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   leaflet: PropTypes.object.isRequired,
   mapSettings: PropTypes.object.isRequired,
-  onCityChange: PropTypes.func,
   activeCity: PropTypes.object.isRequired,
+  onCityChange: PropTypes.func,
 };
 
 const defaultProps = {
