@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-import {RATING_PERCENT} from '../../constants';
+import {RATING_COEFFICIENT} from '../../constants';
 
 const propTypes = {
   offer: PropTypes.shape({
@@ -30,7 +30,7 @@ const OfferCard = (props) => {
   const {rating, id, isPremium, previewImage, price, isFavorite, title, type} = offer;
 
   const activeCard = active ? `cities__place-card--active` : ``;
-  const getRating = () => `${rating * RATING_PERCENT}%`;
+  const getRating = () => `${rating * RATING_COEFFICIENT}%`;
 
   const _handleImgLink = (evt) => {
     evt.preventDefault();

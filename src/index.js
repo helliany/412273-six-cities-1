@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 import {createStore, compose, applyMiddleware} from "redux";
 import {Provider} from "react-redux";
 import thunk from "redux-thunk";
+import {BrowserRouter} from "react-router-dom";
 import leaflet from 'leaflet';
 
-import {Operation} from "./reducer/data/data";
 import reducer from "./reducer/reducer";
 import createAPI from './api';
 import App from "./components/app/app.jsx";
@@ -27,13 +27,13 @@ const init = () => {
       )
   );
 
-  store.dispatch(Operation.loadData());
-
   ReactDOM.render(<Provider store={store}>
-    <App
-      leaflet = {leaflet}
-      mapSettings = {mapSettings}
-    />
+    <BrowserRouter>
+      <App
+        leaflet = {leaflet}
+        mapSettings = {mapSettings}
+      />
+    </BrowserRouter>
   </Provider>,
   document.querySelector(`#root`)
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-import withActiveItem from '../../hocs/with-active-item';
+import withActiveItem from '../../hocs/with-active-item/with-active-item';
 
 const propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
