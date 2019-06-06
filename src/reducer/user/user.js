@@ -1,6 +1,6 @@
 const initialState = {
   user: {},
-  isAuthorizationRequired: false,
+  isAuthorizationRequired: true,
 };
 
 const actionCreator = {
@@ -11,7 +11,10 @@ const actionCreator = {
   signIn: (data) => ({
     type: `SIGN_IN`,
     payload: data,
-  })
+  }),
+  signOut: () => ({
+    type: `SIGN_OUT`,
+  }),
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,6 +25,12 @@ const reducer = (state = initialState, action) => {
 
     case `SIGN_IN`: return {...state,
       user: action.payload,
+      isAuthorizationRequired: false,
+    };
+
+    case `SIGN_OUT`: return {...state,
+      user: {},
+      isAuthorizationRequired: true,
     };
   }
 

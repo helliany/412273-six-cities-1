@@ -1,13 +1,11 @@
 import React from "react";
 import renderer from 'react-test-renderer';
 
-import {SignIn} from "./sign-in.jsx";
+import Favorites from "./favorites.jsx";
 
-it(`SignIn page correctly renders`, () => {
+it(`Favorites page correctly renders`, () => {
   const tree = renderer
-    .create(<SignIn
-      onChangeAuthorization={jest.fn()}
-    />)
+    .create(<Favorites />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

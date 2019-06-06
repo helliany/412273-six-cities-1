@@ -1,5 +1,3 @@
-import camelCase from 'camelcase-keys';
-
 const initialState = {
   city: {
     name: ``,
@@ -58,14 +56,6 @@ const actionCreator = {
   }),
 };
 
-const Operation = {
-  loadData: () => (dispatch, _getState, api) =>
-    api.get(`/hotels`).then((response) => {
-      const data = camelCase(response.data);
-      dispatch(actionCreator.loadData(data));
-    })
-};
-
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case `CHANGE_CITY`: return {...state,
@@ -84,5 +74,4 @@ const reducer = (state = initialState, action) => {
 export {
   actionCreator,
   reducer,
-  Operation,
 };

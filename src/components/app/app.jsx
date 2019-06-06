@@ -1,14 +1,19 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
+import {Switch, Route} from "react-router-dom";
+import camelCase from 'camelcase-keys';
 
 import MainPage from "../main-page/main-page.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
+import Favorites from "../favorites/favorites.jsx";
 import Header from "../header/header.jsx";
+import withPrivateRoute from "../../hocs/with-private-route/with-private-route";
 import {actionCreator} from '../../reducer/data/data';
 import {actionCreator as userActionCreator} from '../../reducer/user/user';
 import {getCities, getActiveCity, getSelectedOffers} from '../../reducer/data/selectors';
-import {requireAuthorization, getUser} from '../../reducer/user/selectors';
+import {getUser} from '../../reducer/user/selectors';
+import createAPI from '../../api';
 
 const propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
@@ -29,67 +34,86 @@ const propTypes = {
     email: PropTypes.string,
     avatarUrl: PropTypes.string,
   }).isRequired,
-  isAuthorizationRequired: PropTypes.bool.isRequired,
-  onSignIn: PropTypes.func,
+  loadData: PropTypes.func.isRequired,
   onCityChange: PropTypes.func,
+  onSignIn: PropTypes.func,
+  onSignOut: PropTypes.func,
 };
 
 const defaultProps = {
   onCityChange: () => {},
   onSignIn: () => {},
+  onSignOut: () => {},
 };
 
-const App = (props) => {
-  const {
-    offers,
-    cities,
-    activeCity,
-    leaflet,
-    mapSettings,
-    onCityChange,
-    user,
-    isAuthorizationRequired,
-    onSignIn,
-  } = props;
+class App extends React.Component {
+  render() {
+    const {
+      offers,
+      cities,
+      activeCity,
+      leaflet,
+      mapSettings,
+      onCityChange,
+      user,
+    } = this. props;
 
-  const Main = <MainPage
-    offers = {offers}
-    cities = {cities}
-    activeCity = {activeCity}
-    leaflet = {leaflet}
-    mapSettings = {mapSettings}
-    onCityChange = {onCityChange}
-  />;
+    const Main = () => <MainPage
+      offers = {offers}
+      cities = {cities}
+      activeCity = {activeCity}
+      leaflet = {leaflet}
+      mapSettings = {mapSettings}
+      onCityChange = {onCityChange}
+    />;
 
-  const SignInPage = <SignIn/>;
+    return <>
+      <Header
+        user={user}
+      />
+      <Switch>
+        <Route exact path="/" component={Main} />
+        <Route path="/login" component={SignIn} />
+        <Route path="/favorites" component={withPrivateRoute(Favorites)} />
+      </Switch>
+    </>;
+  }
 
-  const appPage = isAuthorizationRequired ? SignInPage : Main;
+  componentDidMount() {
+    createAPI()
+      .get(`/login`).then((response) => {
+        const data = camelCase(response.data);
+        this.props.onSignIn(data);
+      }).catch(() => {
+        this.props.onSignOut();
+      });
 
-  return <>
-    <Header
-      user={user}
-      isAuthorizationRequired={isAuthorizationRequired}
-      onSignIn={onSignIn}
-    />
-    {appPage}
-  </>;
-};
+    this.props.loadData();
+  }
+}
 
 const mapStateToProps = (state, ownProps) => ({...ownProps,
   activeCity: getActiveCity(state),
   offers: getSelectedOffers(state),
   cities: getCities(state),
   user: getUser(state),
-  isAuthorizationRequired: requireAuthorization(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onCityChange: (city) => {
     dispatch(actionCreator.changeCity(city));
   },
-  onSignIn: () => {
-    dispatch(userActionCreator.requireAuthorization(true));
-  }
+  onSignIn: (user) => {
+    dispatch(userActionCreator.signIn(user));
+  },
+  onSignOut: () => {
+    dispatch(userActionCreator.signOut());
+  },
+  loadData: () =>
+    createAPI().get(`/hotels`).then((response) => {
+      const data = camelCase(response.data, {deep: true});
+      dispatch(actionCreator.loadData(data));
+    }),
 });
 
 App.propTypes = propTypes;

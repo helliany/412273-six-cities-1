@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import {actionCreator} from "./reducer/user/user";
-import {BASE_URL} from "./constants";
+import {BASE_URL, ResponseStatus} from "./constants";
 
 const createAPI = (dispatch) => {
   const api = axios.create({
@@ -12,11 +12,14 @@ const createAPI = (dispatch) => {
 
   const onSuccess = (response) => response;
   const onFail = (err) => {
-    if (err.response.status === 400) {
+    if (err.response.status === ResponseStatus.FORBIDDEN) {
+      history.pushState(null, null, `/login`);
       dispatch(actionCreator.requireAuthorization(true));
-      return;
     }
-    throw err;
+    if (err.response.status === ResponseStatus.BAD_REQUEST) {
+      dispatch(actionCreator.requireAuthorization(true));
+    }
+    return err;
   };
 
   api.interceptors.response.use(onSuccess, onFail);
