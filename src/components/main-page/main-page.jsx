@@ -21,16 +21,14 @@ const propTypes = {
   leaflet: PropTypes.object.isRequired,
   mapSettings: PropTypes.object.isRequired,
   onCityChange: PropTypes.func,
-  onClick: PropTypes.func,
 };
 
 const defaultProps = {
-  onClick: () => {},
   onCityChange: () => {},
 };
 
 const MainPage = (props) => {
-  const {offers, cities, activeCity, onClick, leaflet, mapSettings, onCityChange} = props;
+  const {offers, cities, activeCity, leaflet, mapSettings, onCityChange} = props;
   const placesFound = `${offers.length} ${offers.length > 1 ? `places` : `place`} to stay in ${activeCity.name}`;
   const coords = offers.map((offer) => offer.location);
 
@@ -69,7 +67,6 @@ const MainPage = (props) => {
 
             <OfferCardList
               offers={offers}
-              onTitleClick={onClick}
             />
 
           </section>

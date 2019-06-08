@@ -1,5 +1,6 @@
 const offers = [
   {
+    id: 1,
     city: {
       name: `Amsterdam`,
       location: {
@@ -10,12 +11,22 @@ const offers = [
     },
     title: `Beautiful location`,
     type: `Apartment`,
+    bedrooms: 3,
+    maxAdults: 4,
     isPremium: true,
     price: 120,
     isFavorite: false,
     rating: 4,
     previewImage: `path`,
-    id: 1,
+    images: [`path1`, `path2`],
+    goods: [`Heating`, `Kitchen`],
+    host: {
+      id: 1,
+      isPro: true,
+      name: `Angelina`,
+      avatarUrl: `path`
+    },
+    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
     location: {
       latitude: 52.35514938496378,
       longitude: 4.673877537499948,
@@ -23,6 +34,7 @@ const offers = [
     },
   },
   {
+    id: 2,
     city: {
       name: `Paris`,
       location: {
@@ -33,12 +45,22 @@ const offers = [
     },
     title: `Wood and stone place`,
     type: `Private room`,
+    bedrooms: 3,
+    maxAdults: 4,
     isPremium: false,
     price: 80,
     isFavorite: true,
     rating: 4.5,
     previewImage: `path`,
-    id: 2,
+    images: [`path1`, `path2`],
+    goods: [`Heating`, `Kitchen`],
+    host: {
+      id: 1,
+      isPro: true,
+      name: `Angelina`,
+      avatarUrl: `path`
+    },
+    description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
     location: {
       latitude: 52.35514938496378,
       longitude: 4.673877537499948,

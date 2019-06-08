@@ -7,18 +7,6 @@ import {offers} from "../../mocks/test-mocks";
 
 Enzyme.configure({adapter: new Adapter()});
 
-it(`Click on card title link correctly works`, () => {
-  const offer = offers[0];
-  const clickHandler = jest.fn();
-  const offerCard = shallow(<OfferCard
-    offer={offer}
-    onTitleClick={clickHandler}
-  />);
-  const link = offerCard.find(`.place-card__name a`);
-  link.simulate(`click`);
-  expect(clickHandler).toHaveBeenCalledTimes(1);
-});
-
 it(`Click on card img link correctly works`, () => {
   const offer = offers[0];
   const clickHandler = jest.fn();
