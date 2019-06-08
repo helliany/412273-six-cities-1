@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {Switch, Route} from "react-router-dom";
+import {Switch, Route, Redirect} from "react-router-dom";
 import camelCase from 'camelcase-keys';
 
 import MainPage from "../main-page/main-page.jsx";
 import SignIn from "../sign-in/sign-in.jsx";
 import Favorites from "../favorites/favorites.jsx";
+import Property from "../property/property.jsx";
 import Header from "../header/header.jsx";
 import withPrivateRoute from "../../hocs/with-private-route/with-private-route";
 import {actionCreator} from '../../reducer/data/data';
@@ -72,9 +73,14 @@ class App extends React.Component {
         user={user}
       />
       <Switch>
-        <Route exact path="/" component={Main} />
-        <Route path="/login" component={SignIn} />
-        <Route path="/favorites" component={withPrivateRoute(Favorites)} />
+        <Route path="/" exact component={Main} />
+        <Route path="/login" exact component={SignIn} />
+        <Route path="/favorites" exact component={withPrivateRoute(Favorites)} />
+        <Route path="/offer/:id" exact render={({match}) => {
+          return <Property
+            offer={offers.find((it) => it.id === Number(match.params.id))}/>;
+        }} />
+        <Redirect to="/"/>
       </Switch>
     </>;
   }

@@ -16,17 +16,15 @@ const propTypes = {
     previewImage: PropTypes.string.isRequired,
   })).isRequired,
   activeItem: PropTypes.number,
-  onTitleClick: PropTypes.func,
   onActiveItemChange: PropTypes.func,
 };
 
 const defaultProps = {
   activeItem: 0,
-  onTitleClick: () => {},
   onActiveItemChange: () => {},
 };
 
-const OfferCardList = ({offers, activeItem, onTitleClick, onActiveItemChange}) => {
+const OfferCardList = ({offers, activeItem, onActiveItemChange}) => {
   const _handleImgClick = (item) => {
     onActiveItemChange(item);
   };
@@ -37,7 +35,6 @@ const OfferCardList = ({offers, activeItem, onTitleClick, onActiveItemChange}) =
         offer={offer}
         key={offer.id}
         active={activeItem === offer.id ? activeItem : undefined}
-        onTitleClick={onTitleClick}
         onImgClick={_handleImgClick}
       />
     )}

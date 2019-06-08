@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 
 import {RATING_COEFFICIENT} from '../../constants';
 
@@ -15,18 +16,16 @@ const propTypes = {
     previewImage: PropTypes.string.isRequired,
   }).isRequired,
   active: PropTypes.number,
-  onTitleClick: PropTypes.func,
   onImgClick: PropTypes.func,
 };
 
 const defaultProps = {
   active: 0,
-  onTitleClick: () => {},
   onImgClick: () => {},
 };
 
 const OfferCard = (props) => {
-  const {offer, active, onTitleClick, onImgClick} = props;
+  const {offer, active, onImgClick} = props;
   const {rating, id, isPremium, previewImage, price, isFavorite, title, type} = offer;
 
   const activeCard = active ? `cities__place-card--active` : ``;
@@ -75,7 +74,7 @@ const OfferCard = (props) => {
         </div>
       </div>
       <h2 className="place-card__name">
-        <a href="#" onClick={onTitleClick}>{title}</a>
+        <Link to={`/offer/${id}`} >{title}</Link>
       </h2>
       <p className="place-card__type">{type}</p>
     </div>
