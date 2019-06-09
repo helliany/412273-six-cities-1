@@ -57,7 +57,7 @@ class App extends React.Component {
       mapSettings,
       onCityChange,
       user,
-    } = this. props;
+    } = this.props;
 
     const Main = () => <MainPage
       offers = {offers}
@@ -78,7 +78,10 @@ class App extends React.Component {
         <Route path="/favorites" exact component={withPrivateRoute(Favorites)} />
         <Route path="/offer/:id" exact render={({match}) => {
           return <Property
-            offer={offers.find((it) => it.id === Number(match.params.id))}/>;
+            offerId = {Number(match.params.id)}
+            offers = {offers}
+            mapSettings = {mapSettings}
+            leaflet = {leaflet}/>;
         }} />
         <Redirect to="/"/>
       </Switch>
@@ -119,7 +122,7 @@ const mapDispatchToProps = (dispatch) => ({
     createAPI().get(`/hotels`).then((response) => {
       const data = camelCase(response.data, {deep: true});
       dispatch(actionCreator.loadData(data));
-    }),
+    }).catch(() => {}),
 });
 
 App.propTypes = propTypes;

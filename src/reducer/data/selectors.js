@@ -1,7 +1,7 @@
 import {createSelector} from 'reselect';
 
 import NameSpace from '../name-spaces';
-import {CitiesNumber} from '../../constants';
+import {MaxItemsNumber} from '../../constants';
 
 const NAME_SPACE = NameSpace.DATA;
 
@@ -17,5 +17,5 @@ export const getSelectedOffers = createSelector(
 
 export const getCities = createSelector(
     getOffers,
-    (offers) => Array.from(new Set(offers.map((offer) => offer.city.name))).slice(CitiesNumber.MIN, CitiesNumber.MAX),
+    (offers) => Array.from(new Set(offers.map((offer) => offer.city.name))).slice(MaxItemsNumber.MIN, MaxItemsNumber.MAX),
 );

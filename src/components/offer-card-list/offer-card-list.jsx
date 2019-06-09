@@ -29,7 +29,7 @@ const OfferCardList = ({offers, activeItem, onActiveItemChange}) => {
     onActiveItemChange(item);
   };
 
-  return <div className="cities__places-list places__list tabs__content">
+  return <>
     {offers.map((offer) =>
       <OfferCard
         offer={offer}
@@ -38,7 +38,7 @@ const OfferCardList = ({offers, activeItem, onActiveItemChange}) => {
         onImgClick={_handleImgClick}
       />
     )}
-  </div>;
+  </>;
 };
 
 const WrappedOfferCardList = withActiveItem(OfferCardList);
