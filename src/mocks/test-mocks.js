@@ -69,6 +69,33 @@ const offers = [
   },
 ];
 
+const reviews = [
+  {
+    id: 1,
+    user: {
+      id: 1,
+      isPro: false,
+      name: `Max`,
+      avatarUrl: `path`,
+    },
+    rating: 4,
+    comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+    date: `2019-05-08T14:13:56.569Z`,
+  },
+  {
+    id: 2,
+    user: {
+      id: 2,
+      isPro: true,
+      name: `Oliver`,
+      avatarUrl: `path`,
+    },
+    rating: 2,
+    comment: `The deluxe room was a quite comfortable one with all the adequate facilities.`,
+    date: `2019-05-08T14:13:56.569Z`,
+  }
+];
+
 const leaflet = {
   map() {
     return {
@@ -107,4 +134,4 @@ const mapSettings = {
   },
 };
 
-export {offers, leaflet, mapSettings};
+export {offers, reviews, leaflet, mapSettings};

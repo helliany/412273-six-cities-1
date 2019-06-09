@@ -29,7 +29,7 @@ const OfferCard = (props) => {
   const {rating, id, isPremium, previewImage, price, isFavorite, title, type} = offer;
 
   const activeCard = active ? `cities__place-card--active` : ``;
-  const getRating = () => `${rating * RATING_COEFFICIENT}%`;
+  const _getRating = () => `${rating * RATING_COEFFICIENT}%`;
 
   const _handleImgLink = (evt) => {
     evt.preventDefault();
@@ -69,7 +69,7 @@ const OfferCard = (props) => {
       </div>
       <div className="place-card__rating rating">
         <div className="place-card__stars rating__stars">
-          <span style={{width: getRating()}}></span>
+          <span style={{width: _getRating()}}></span>
           <span className="visually-hidden">Rating</span>
         </div>
       </div>

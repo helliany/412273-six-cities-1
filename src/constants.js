@@ -12,9 +12,14 @@ const mapSettings = {
   marker: true,
 };
 
-const CitiesNumber = {
+const MaxItemsNumber = {
   MIN: 0,
   MAX: 6,
+};
+
+const OffersNearNumber = {
+  MIN: 0,
+  MAX: 3,
 };
 
 const RATING_COEFFICIENT = 20;
@@ -23,6 +28,7 @@ export {
   BASE_URL,
   ResponseStatus,
   mapSettings,
-  CitiesNumber,
+  MaxItemsNumber,
+  OffersNearNumber,
   RATING_COEFFICIENT
 };
